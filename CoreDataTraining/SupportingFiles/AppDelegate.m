@@ -61,7 +61,7 @@
                      Check the error message to determine what the actual problem was.
                     */
                     NSLog(@"Unresolved error %@, %@", error, error.userInfo);
-                    abort();
+                    assert(false);
                 }
             }];
         }
