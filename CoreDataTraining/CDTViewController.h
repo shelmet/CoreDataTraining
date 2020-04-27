@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CDTViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface CDTViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *booksCollectionView;
+@property (weak, nonatomic) IBOutlet UITextField *bookTitleTextField;
+@property (weak, nonatomic) IBOutlet UITextField *authorNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *numberOfPagesTextField;
 
 @end
 

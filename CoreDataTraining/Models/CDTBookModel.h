@@ -12,4 +12,8 @@
 @property (nonatomic) int numberOfPages;
 @property (nonatomic, strong) NSString *authorName;
 
+- (instancetype) initWithBookTitle:(NSString *)bookTitle
+                     numberOfPages:(int)numberOfPages
+                        authorName:(NSString *)authorName;
+
 @end

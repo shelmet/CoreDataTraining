@@ -16,8 +16,8 @@
 		79C5C9CC2451C83F0051D0AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79C5C9CA2451C83F0051D0AE /* LaunchScreen.storyboard */; };
 		79C5C9CF2451C83F0051D0AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C9CE2451C83F0051D0AE /* main.m */; };
 		79C5C9D82455D7AE0051D0AE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79C5C9D72455D7AE0051D0AE /* Default-568h@2x.png */; };
-		79C5C9E32456D9180051D0AE /* BooksCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C9E02456D9180051D0AE /* BooksCollectionViewCell.m */; };
-		79C5C9E42456D9180051D0AE /* BooksCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C5C9E12456D9180051D0AE /* BooksCollectionViewCell.xib */; };
+		79C5C9E32456D9180051D0AE /* CDTBooksCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C9E02456D9180051D0AE /* CDTBooksCollectionViewCell.m */; };
+		79C5C9E42456D9180051D0AE /* CDTBooksCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C5C9E12456D9180051D0AE /* CDTBooksCollectionViewCell.xib */; };
 		79C5C9E92456DC300051D0AE /* CDTBookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C9E82456DC300051D0AE /* CDTBookModel.m */; };
 /* End PBXBuildFile section */
 
@@ -36,9 +36,9 @@
 		79C5C9CD2451C83F0051D0AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79C5C9CE2451C83F0051D0AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		79C5C9D72455D7AE0051D0AE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		79C5C9E02456D9180051D0AE /* BooksCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksCollectionViewCell.m; sourceTree = "<group>"; };
-		79C5C9E12456D9180051D0AE /* BooksCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BooksCollectionViewCell.xib; sourceTree = "<group>"; };
-		79C5C9E22456D9180051D0AE /* BooksCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksCollectionViewCell.h; sourceTree = "<group>"; };
+		79C5C9E02456D9180051D0AE /* CDTBooksCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTBooksCollectionViewCell.m; sourceTree = "<group>"; };
+		79C5C9E12456D9180051D0AE /* CDTBooksCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CDTBooksCollectionViewCell.xib; sourceTree = "<group>"; };
+		79C5C9E22456D9180051D0AE /* CDTBooksCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTBooksCollectionViewCell.h; sourceTree = "<group>"; };
 		79C5C9E72456DC1B0051D0AE /* CDTBookModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDTBookModel.h; sourceTree = "<group>"; };
 		79C5C9E82456DC300051D0AE /* CDTBookModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CDTBookModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,9 +111,9 @@
 		79C5C9DF2456D9180051D0AE /* BooksCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				79C5C9E02456D9180051D0AE /* BooksCollectionViewCell.m */,
-				79C5C9E12456D9180051D0AE /* BooksCollectionViewCell.xib */,
-				79C5C9E22456D9180051D0AE /* BooksCollectionViewCell.h */,
+				79C5C9E22456D9180051D0AE /* CDTBooksCollectionViewCell.h */,
+				79C5C9E02456D9180051D0AE /* CDTBooksCollectionViewCell.m */,
+				79C5C9E12456D9180051D0AE /* CDTBooksCollectionViewCell.xib */,
 			);
 			path = BooksCollectionViewCell;
 			sourceTree = "<group>";
@@ -184,7 +184,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79C5C9E42456D9180051D0AE /* BooksCollectionViewCell.xib in Resources */,
+				79C5C9E42456D9180051D0AE /* CDTBooksCollectionViewCell.xib in Resources */,
 				79C5C9CC2451C83F0051D0AE /* LaunchScreen.storyboard in Resources */,
 				79C5C9D82455D7AE0051D0AE /* Default-568h@2x.png in Resources */,
 				79C5C9C92451C83F0051D0AE /* Assets.xcassets in Resources */,
@@ -205,7 +205,7 @@
 				79C5C9E92456DC300051D0AE /* CDTBookModel.m in Sources */,
 				79C5C9BB2451C83B0051D0AE /* AppDelegate.m in Sources */,
 				79C5C9BE2451C83B0051D0AE /* SceneDelegate.m in Sources */,
-				79C5C9E32456D9180051D0AE /* BooksCollectionViewCell.m in Sources */,
+				79C5C9E32456D9180051D0AE /* CDTBooksCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
