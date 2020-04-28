@@ -22,10 +22,10 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
 #pragma mark - Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSAssert(self.container != nil, @"This viewcontroller needs a persistent container");
     self.booksCollectionView.delegate = self;
     self.booksCollectionView.dataSource = self;
     self.bookModelsArray = [NSMutableArray array];
-    
     UINib *cellNib = [UINib nibWithNibName:@"CDTBooksCollectionViewCell" bundle:nil];
     [self.booksCollectionView registerNib:cellNib forCellWithReuseIdentifier:kBookCellReuseIdentifier];
     
@@ -49,6 +49,7 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
 
 #pragma mark - Book model array creation/update
 - (void) updateBookModelsArray {
+    
     [self updateUI];
 }
 
