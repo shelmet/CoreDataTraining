@@ -19,9 +19,9 @@
                      numberOfPages:(int)numberOfPages
                          authorName:(NSString *)authorName {
     if (self = [super init]) {
-        _bookTitle = bookTitle;
-        _numberOfPages = numberOfPages;
-        _authorName = authorName;
+        self.bookTitle = bookTitle;
+        self.numberOfPages = numberOfPages;
+        self.authorName = authorName;
     }
     
     return self;
