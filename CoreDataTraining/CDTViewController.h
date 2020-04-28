@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *bookTitleTextField;
 @property (weak, nonatomic) IBOutlet UITextField *authorNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *numberOfPagesTextField;
+@property (weak, nonatomic) IBOutlet UIView *zeroCaseView;
 
 @end
 

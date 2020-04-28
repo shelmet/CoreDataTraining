@@ -32,20 +32,41 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
     [self updateBookModelsArray];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self updateUI];
+}
+
+- (void) updateUI {
+    if ([self.bookModelsArray count] == 0) {
+        [self.zeroCaseView setHidden:NO];
+    } else {
+        [self.zeroCaseView setHidden:YES];
+    }
+    
+    [self.booksCollectionView reloadData];
+}
+
 #pragma mark - Book model array creation/update
 - (void) updateBookModelsArray {
-
+    [self updateUI];
 }
 
 - (void) addNewBook:(CDTBookModel *)bookModel {
-    
+    [self.bookModelsArray addObject:bookModel];
+    [self updateBookModelsArray];
+}
+
+- (void) clearBooksStorage {
+    [self.bookModelsArray removeAllObjects];
+    [self updateUI];
 }
 
 #pragma mark - @IBActions
 - (IBAction)addButtonTouchUp:(UIButton *)sender {
     NSString *trimmedBookTitle = [self.bookTitleTextField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
-    NSString *trimmedAuthorName = [self.bookTitleTextField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
-    NSString *trimmedNumberOfPages = [self.bookTitleTextField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
+    NSString *trimmedAuthorName = [self.authorNameTextField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
+    NSString *trimmedNumberOfPages = [self.numberOfPagesTextField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
     if ([trimmedBookTitle length] == 0
         || [trimmedAuthorName length] == 0
         || [trimmedNumberOfPages length] == 0) {
@@ -63,7 +84,7 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
 }
 
 - (IBAction)clearAllButtonTouchUp:(UIButton *)sender {
-    
+    [self clearBooksStorage];
 }
 
 #pragma mark - UICollectionView delegate & dataSource methods

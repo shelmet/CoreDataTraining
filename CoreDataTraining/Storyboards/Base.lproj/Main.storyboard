@@ -22,7 +22,7 @@
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
@@ -64,17 +64,17 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9wC-i1-3eW">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="9wC-i1-3eW">
                                         <rect key="frame" x="187" y="12" width="215" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9xv-zn-SCl">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="9xv-zn-SCl">
                                         <rect key="frame" x="187" y="53.5" width="215" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oOs-Wm-zSe">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="oOs-Wm-zSe">
                                         <rect key="frame" x="187" y="95" width="215" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -138,15 +138,35 @@
                                     <constraint firstItem="9xv-zn-SCl" firstAttribute="leading" secondItem="oOs-Wm-zSe" secondAttribute="leading" id="yds-kX-W0H"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1l4-tY-hsl">
+                                <rect key="frame" x="0.0" y="279" width="414" height="583"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO BOOKS IN STORAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O31-3R-1Pe">
+                                        <rect key="frame" x="92.5" y="279" width="229" height="25.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="O31-3R-1Pe" firstAttribute="centerX" secondItem="1l4-tY-hsl" secondAttribute="centerX" id="A0Q-yL-WeT"/>
+                                    <constraint firstItem="O31-3R-1Pe" firstAttribute="centerY" secondItem="1l4-tY-hsl" secondAttribute="centerY" id="Ct8-p0-lgT"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="F0c-ME-u1U" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1cA-fK-B73"/>
                             <constraint firstItem="F0c-ME-u1U" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6Fs-7N-ec8"/>
+                            <constraint firstItem="1l4-tY-hsl" firstAttribute="leading" secondItem="KFt-rY-V0T" secondAttribute="leading" id="9Yc-Xb-rSK"/>
                             <constraint firstItem="KFt-rY-V0T" firstAttribute="top" secondItem="tH1-fu-nQl" secondAttribute="bottom" id="OBr-CJ-wi7"/>
+                            <constraint firstItem="1l4-tY-hsl" firstAttribute="top" secondItem="KFt-rY-V0T" secondAttribute="top" id="VMr-4f-ima"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KFt-rY-V0T" secondAttribute="bottom" id="mj0-mc-QQ4"/>
                             <constraint firstItem="KFt-rY-V0T" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mjh-H7-HWR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="F0c-ME-u1U" secondAttribute="trailing" id="s0o-HG-X52"/>
+                            <constraint firstItem="1l4-tY-hsl" firstAttribute="bottom" secondItem="KFt-rY-V0T" secondAttribute="bottom" id="sEG-y2-hvX"/>
+                            <constraint firstItem="1l4-tY-hsl" firstAttribute="trailing" secondItem="KFt-rY-V0T" secondAttribute="trailing" id="seh-jO-eFw"/>
                             <constraint firstItem="tH1-fu-nQl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="suw-wi-gQz"/>
                             <constraint firstItem="KFt-rY-V0T" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="w33-EM-v3S"/>
                             <constraint firstItem="tH1-fu-nQl" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wPi-QC-yJR"/>
@@ -159,6 +179,7 @@
                         <outlet property="bookTitleTextField" destination="9wC-i1-3eW" id="jON-NC-YnW"/>
                         <outlet property="booksCollectionView" destination="KFt-rY-V0T" id="kUg-LS-zkD"/>
                         <outlet property="numberOfPagesTextField" destination="oOs-Wm-zSe" id="nft-GS-FL7"/>
+                        <outlet property="zeroCaseView" destination="1l4-tY-hsl" id="mK6-BD-6f9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
