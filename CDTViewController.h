@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *numberOfPagesTextField;
 @property (weak, nonatomic) IBOutlet UIView *zeroCaseView;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UISwitch *isReadSwitch;
 
 @end
 

@@ -22,6 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSString* authorName;
 
+@property (nonatomic, strong, nullable) NSNumber* isRead;
+
+@property (atomic) BOOL isReadValue;
+- (BOOL)isReadValue;
+- (void)setIsReadValue:(BOOL)value_;
+
 @property (nonatomic, strong, nullable) NSNumber* numberOfPages;
 
 @property (atomic) int64_t numberOfPagesValue;
@@ -37,6 +43,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString*)primitiveAuthorName;
 - (void)setPrimitiveAuthorName:(nullable NSString*)value;
 
+- (nullable NSNumber*)primitiveIsRead;
+- (void)setPrimitiveIsRead:(nullable NSNumber*)value;
+
+- (BOOL)primitiveIsReadValue;
+- (void)setPrimitiveIsReadValue:(BOOL)value_;
+
 - (nullable NSNumber*)primitiveNumberOfPages;
 - (void)setPrimitiveNumberOfPages:(nullable NSNumber*)value;
 
@@ -50,6 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BookAttributes: NSObject 
 + (NSString *)authorName;
++ (NSString *)isRead;
 + (NSString *)numberOfPages;
 + (NSString *)title;
 @end

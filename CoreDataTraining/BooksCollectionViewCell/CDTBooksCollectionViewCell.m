@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberOfPagesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *checkmarkImageView;
+@property (weak, nonatomic) IBOutlet UILabel *isReadLabel;
 
 @end
 
@@ -27,11 +28,17 @@
 - (void) configureWithTitle:(NSString *)title
                  authorName:(NSString *)authorName
               numberOfPages:(int)numberOfPages
+                     isRead:(BOOL)isRead
                  isSelected:(BOOL)isSelected {
     [self.titleLabel setText:title];
     [self.authorNameLabel setText:authorName];
     NSString *pagesString = [NSString stringWithFormat:@"%d", numberOfPages];
     [self.numberOfPagesLabel setText:pagesString];
+    if (isRead) {
+        [self.isReadLabel setText:@"YES"];
+    } else {
+        [self.isReadLabel setText:@"NO"];
+    }
     if (isSelected) {
         [self.checkmarkImageView setHidden:NO];
     } else {

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) configureWithTitle:(NSString *)title
                  authorName:(NSString *)authorName
               numberOfPages:(int)numberOfPages
+                     isRead:(BOOL)isRead
                  isSelected:(BOOL)isSelected;
 
 @end

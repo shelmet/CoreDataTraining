@@ -29,6 +29,11 @@
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+	if ([key isEqualToString:@"isReadValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"isRead"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"numberOfPagesValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"numberOfPages"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -39,6 +44,26 @@
 }
 
 @dynamic authorName;
+
+@dynamic isRead;
+
+- (BOOL)isReadValue {
+	NSNumber *result = [self isRead];
+	return [result boolValue];
+}
+
+- (void)setIsReadValue:(BOOL)value_ {
+	[self setIsRead:@(value_)];
+}
+
+- (BOOL)primitiveIsReadValue {
+	NSNumber *result = [self primitiveIsRead];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIsReadValue:(BOOL)value_ {
+	[self setPrimitiveIsRead:@(value_)];
+}
 
 @dynamic numberOfPages;
 
@@ -67,6 +92,9 @@
 @implementation BookAttributes 
 + (NSString *)authorName {
 	return @"authorName";
+}
++ (NSString *)isRead {
+	return @"isRead";
 }
 + (NSString *)numberOfPages {
 	return @"numberOfPages";

@@ -28,7 +28,7 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
     UINib *cellNib = [UINib nibWithNibName:@"CDTBooksCollectionViewCell" bundle:nil];
     [self.booksCollectionView registerNib:cellNib forCellWithReuseIdentifier:kBookCellReuseIdentifier];
     
-    [self updateBookModelsArray];
+    [self fetchBooks];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,7 +47,7 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
 }
 
 #pragma mark - Book model array creation/update
-- (void) updateBookModelsArray {
+- (void) fetchBooks {
     NSManagedObjectContext *moc = self.container.viewContext;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:Book.entityName];
     NSError *error = nil;
@@ -62,13 +62,15 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
 
 - (void) addNewBookWithTitle:(NSString *)title
                numberOfPages:(int)numberOfPages
-                  authorName:(NSString *)authorName  {
+                  authorName:(NSString *)authorName
+                      isRead:(BOOL)isRead {
     
     NSManagedObjectContext *moc = self.container.viewContext;
     Book *newBook = [Book insertInManagedObjectContext:moc];
     newBook.title = title;
     newBook.numberOfPagesValue = numberOfPages;
     newBook.authorName = authorName;
+    newBook.isReadValue = isRead;
     NSError *error = nil;
     if ([moc save:&error] == NO) {
         NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
@@ -126,7 +128,10 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
         return;
     }
     
-    [self addNewBookWithTitle:trimmedBookTitle numberOfPages:numberOfPages authorName:trimmedAuthorName];
+    [self addNewBookWithTitle:trimmedBookTitle
+                numberOfPages:numberOfPages
+                   authorName:trimmedAuthorName
+                       isRead:self.isReadSwitch.isOn];
 }
 
 - (IBAction)clearAllButtonTouchUp:(UIButton *)sender {
@@ -141,16 +146,14 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     CDTBooksCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBookCellReuseIdentifier forIndexPath:indexPath];
     Book *bookModel = self.bookModelsArray[indexPath.row];
-    NSString *title = bookModel.title;
-    NSString *authorName = bookModel.authorName;
-    int numberOfPages = (int)bookModel.numberOfPagesValue;
     BOOL isSelected = NO;
     if (self.selectedBookIndexPath && self.selectedBookIndexPath == indexPath) {
         isSelected = YES;
     }
-    [cell configureWithTitle:title
-                  authorName:authorName
-               numberOfPages:numberOfPages
+    [cell configureWithTitle:bookModel.title
+                  authorName:bookModel.authorName
+               numberOfPages:(int)bookModel.numberOfPagesValue
+                      isRead:bookModel.isReadValue
                   isSelected:isSelected];
     
     return cell;
@@ -180,7 +183,7 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
 #pragma mark - UICollectionViewDelegateFlowLayout delegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat cellWidth = CGRectGetWidth(collectionView.frame);
-    CGFloat cellHeight = 70;
+    CGFloat cellHeight = 80;
     return CGSizeMake(cellWidth, cellHeight);
 }
 
