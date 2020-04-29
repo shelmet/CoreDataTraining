@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "Book.h"
 
 @interface CDTViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *authorNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *numberOfPagesTextField;
 @property (weak, nonatomic) IBOutlet UIView *zeroCaseView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @end
 

@@ -8,11 +8,11 @@
 
 #import "CDTViewController.h"
 #import "CDTBooksCollectionViewCell.h"
-#import "CDTBookModel.h"
 
 @interface CDTViewController ()
 
 @property (nonatomic, strong) NSMutableArray *bookModelsArray;
+@property (nonatomic, strong) NSIndexPath *selectedBookIndexPath;
 
 @end
 
@@ -25,7 +25,6 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
     NSAssert(self.container != nil, @"This viewcontroller needs a persistent container");
     self.booksCollectionView.delegate = self;
     self.booksCollectionView.dataSource = self;
-    self.bookModelsArray = [NSMutableArray array];
     UINib *cellNib = [UINib nibWithNibName:@"CDTBooksCollectionViewCell" bundle:nil];
     [self.booksCollectionView registerNib:cellNib forCellWithReuseIdentifier:kBookCellReuseIdentifier];
     
@@ -49,18 +48,67 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
 
 #pragma mark - Book model array creation/update
 - (void) updateBookModelsArray {
-    
+    NSManagedObjectContext *moc = self.container.viewContext;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:Book.entityName];
+    NSError *error = nil;
+    NSArray *results = [moc executeFetchRequest:fetchRequest error:&error];
+    if (!results) {
+        NSLog(@"Error fetching Employee objects: %@\n%@", [error localizedDescription], [error userInfo]);
+        abort();
+    }
+    self.bookModelsArray = [[NSMutableArray alloc] initWithArray:results];
     [self updateUI];
 }
 
-- (void) addNewBook:(CDTBookModel *)bookModel {
-    [self.bookModelsArray addObject:bookModel];
-    [self updateBookModelsArray];
+- (void) addNewBookWithTitle:(NSString *)title
+               numberOfPages:(int)numberOfPages
+                  authorName:(NSString *)authorName  {
+    
+    NSManagedObjectContext *moc = self.container.viewContext;
+    Book *newBook = [Book insertInManagedObjectContext:moc];
+    newBook.title = title;
+    newBook.numberOfPagesValue = numberOfPages;
+    newBook.authorName = authorName;
+    NSError *error = nil;
+    if ([moc save:&error] == NO) {
+        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+    }
+
+    [self.bookModelsArray addObject:newBook];
+    [self updateUI];
 }
 
 - (void) clearBooksStorage {
+    NSManagedObjectContext *moc = self.container.viewContext;
+    for (Book *book in self.bookModelsArray) {
+        [moc deleteObject:book];
+    }
+    NSError *error = nil;
+    if ([moc save:&error] == NO) {
+        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        return;
+    }
     [self.bookModelsArray removeAllObjects];
     [self updateUI];
+}
+
+- (void) deleteSelectedBook {
+    if (!self.selectedBookIndexPath) {
+        NSAssert(NO, @"selectedIndexPath shouldn't be nil here");
+        return;
+    }
+    Book *selectedBook = self.bookModelsArray[self.selectedBookIndexPath.row];
+    NSManagedObjectContext *moc = self.container.viewContext;
+    [moc deleteObject:selectedBook];
+    NSError *error = nil;
+    if ([moc save:&error] == NO) {
+        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        return;
+    }
+    [self.bookModelsArray removeObject:selectedBook];
+    [self.booksCollectionView deleteItemsAtIndexPaths:@[self.selectedBookIndexPath]];
+    self.selectedBookIndexPath = nil;
+    [self.deleteButton setHidden:YES];
 }
 
 #pragma mark - @IBActions
@@ -78,24 +126,32 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
         return;
     }
     
-    CDTBookModel *newBook = [[CDTBookModel alloc] initWithBookTitle:trimmedBookTitle
-                                                      numberOfPages:numberOfPages
-                                                         authorName:trimmedAuthorName];
-    [self addNewBook:newBook];
+    [self addNewBookWithTitle:trimmedBookTitle numberOfPages:numberOfPages authorName:trimmedAuthorName];
 }
 
 - (IBAction)clearAllButtonTouchUp:(UIButton *)sender {
     [self clearBooksStorage];
 }
 
+- (IBAction)deleteButtonTouchUp:(UIButton *)sender {
+    [self deleteSelectedBook];
+}
+
 #pragma mark - UICollectionView delegate & dataSource methods
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     CDTBooksCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBookCellReuseIdentifier forIndexPath:indexPath];
-    CDTBookModel *bookModel = self.bookModelsArray[indexPath.row];
-    NSString *title = bookModel.bookTitle;
+    Book *bookModel = self.bookModelsArray[indexPath.row];
+    NSString *title = bookModel.title;
     NSString *authorName = bookModel.authorName;
-    int numberOfPages = bookModel.numberOfPages;
-    [cell configureWithTitle:title authorName:authorName numberOfPages:numberOfPages];
+    int numberOfPages = (int)bookModel.numberOfPagesValue;
+    BOOL isSelected = NO;
+    if (self.selectedBookIndexPath && self.selectedBookIndexPath == indexPath) {
+        isSelected = YES;
+    }
+    [cell configureWithTitle:title
+                  authorName:authorName
+               numberOfPages:numberOfPages
+                  isSelected:isSelected];
     
     return cell;
 }
@@ -105,8 +161,20 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellNumber = [NSString stringWithFormat: @"%ld", (long)indexPath.row];
-    NSLog(@"Didselect cell %@ ", cellNumber);
+    NSMutableArray *indexPathsToReload = [[NSMutableArray alloc] initWithArray:@[indexPath]];
+    if (!self.selectedBookIndexPath) {
+        self.selectedBookIndexPath = indexPath;
+        [self.deleteButton setHidden:NO];
+    } else if (self.selectedBookIndexPath == indexPath) {
+        self.selectedBookIndexPath = nil;
+        [self.deleteButton setHidden:YES];
+    } else {
+        [indexPathsToReload addObject:self.selectedBookIndexPath];
+        self.selectedBookIndexPath = indexPath;
+        [self.deleteButton setHidden:NO];
+    }
+    
+    [collectionView reloadItemsAtIndexPaths:indexPathsToReload];
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout delegate

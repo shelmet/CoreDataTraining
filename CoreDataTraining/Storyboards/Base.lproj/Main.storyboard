@@ -22,7 +22,7 @@
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
+                                    <inset key="sectionInset" minX="0.0" minY="5" maxX="0.0" maxY="57"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
@@ -154,6 +154,20 @@
                                     <constraint firstItem="O31-3R-1Pe" firstAttribute="centerY" secondItem="1l4-tY-hsl" secondAttribute="centerY" id="Ct8-p0-lgT"/>
                                 </constraints>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bh5-hV-Uou">
+                                <rect key="frame" x="362" y="810" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Qh9-5O-vWK"/>
+                                    <constraint firstAttribute="height" constant="44" id="wtI-VP-51X"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="trash.circle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="26" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R3v-2V-tP6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -168,8 +182,10 @@
                             <constraint firstItem="1l4-tY-hsl" firstAttribute="bottom" secondItem="KFt-rY-V0T" secondAttribute="bottom" id="sEG-y2-hvX"/>
                             <constraint firstItem="1l4-tY-hsl" firstAttribute="trailing" secondItem="KFt-rY-V0T" secondAttribute="trailing" id="seh-jO-eFw"/>
                             <constraint firstItem="tH1-fu-nQl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="suw-wi-gQz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Bh5-hV-Uou" secondAttribute="bottom" constant="8" id="v9H-Ha-Ee5"/>
                             <constraint firstItem="KFt-rY-V0T" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="w33-EM-v3S"/>
                             <constraint firstItem="tH1-fu-nQl" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wPi-QC-yJR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bh5-hV-Uou" secondAttribute="trailing" constant="8" id="wdm-gE-Pmw"/>
                             <constraint firstItem="tH1-fu-nQl" firstAttribute="top" secondItem="F0c-ME-u1U" secondAttribute="bottom" id="zn3-qT-xl5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -178,6 +194,7 @@
                         <outlet property="authorNameTextField" destination="9xv-zn-SCl" id="KlX-mI-61F"/>
                         <outlet property="bookTitleTextField" destination="9wC-i1-3eW" id="jON-NC-YnW"/>
                         <outlet property="booksCollectionView" destination="KFt-rY-V0T" id="kUg-LS-zkD"/>
+                        <outlet property="deleteButton" destination="Bh5-hV-Uou" id="9HB-vU-Cif"/>
                         <outlet property="numberOfPagesTextField" destination="oOs-Wm-zSe" id="nft-GS-FL7"/>
                         <outlet property="zeroCaseView" destination="1l4-tY-hsl" id="mK6-BD-6f9"/>
                     </connections>
@@ -187,4 +204,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="65.625"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="trash.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>

@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfPagesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *checkmarkImageView;
 
 @end
 
@@ -25,11 +26,17 @@
 
 - (void) configureWithTitle:(NSString *)title
                  authorName:(NSString *)authorName
-              numberOfPages:(int)numberOfPages {
+              numberOfPages:(int)numberOfPages
+                 isSelected:(BOOL)isSelected {
     [self.titleLabel setText:title];
     [self.authorNameLabel setText:authorName];
     NSString *pagesString = [NSString stringWithFormat:@"%d", numberOfPages];
     [self.numberOfPagesLabel setText:pagesString];
+    if (isSelected) {
+        [self.checkmarkImageView setHidden:NO];
+    } else {
+        [self.checkmarkImageView setHidden:YES];
+    }
 }
 
 @end

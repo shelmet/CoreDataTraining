@@ -75,10 +75,20 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1Z4-ZX-Qqj">
+                                <rect key="frame" x="180" y="41" width="30" height="29"/>
+                                <color key="tintColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Sao-3s-lOX"/>
+                                    <constraint firstAttribute="width" constant="30" id="lBb-N5-8Yi"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="zbB-cw-8jc" firstAttribute="centerY" secondItem="mez-7N-DjX" secondAttribute="centerY" id="5h1-Sr-0hx"/>
+                            <constraint firstItem="1Z4-ZX-Qqj" firstAttribute="centerY" secondItem="mez-7N-DjX" secondAttribute="centerY" id="S8J-Sl-I9R"/>
+                            <constraint firstAttribute="trailing" secondItem="1Z4-ZX-Qqj" secondAttribute="trailing" constant="16" id="dnk-xe-mSa"/>
                             <constraint firstItem="zbB-cw-8jc" firstAttribute="leading" secondItem="mez-7N-DjX" secondAttribute="leading" constant="10" id="eUb-9Q-S6q"/>
                         </constraints>
                     </view>
@@ -94,10 +104,14 @@
             <size key="customSize" width="226" height="111"/>
             <connections>
                 <outlet property="authorNameLabel" destination="VtI-2E-6fC" id="iRZ-Gn-S6T"/>
+                <outlet property="checkmarkImageView" destination="1Z4-ZX-Qqj" id="mao-h6-fZo"/>
                 <outlet property="numberOfPagesLabel" destination="VcP-b1-PIN" id="QrX-c2-jQ7"/>
                 <outlet property="titleLabel" destination="gXp-lQ-5Rc" id="A4X-eI-dnV"/>
             </connections>
-            <point key="canvasLocation" x="87" y="11"/>
+            <point key="canvasLocation" x="86.956521739130437" y="10.379464285714285"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>
