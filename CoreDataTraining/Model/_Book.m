@@ -43,8 +43,6 @@
 	return keyPaths;
 }
 
-@dynamic authorName;
-
 @dynamic isRead;
 
 - (BOOL)isReadValue {
@@ -87,12 +85,11 @@
 
 @dynamic title;
 
+@dynamic author;
+
 @end
 
 @implementation BookAttributes 
-+ (NSString *)authorName {
-	return @"authorName";
-}
 + (NSString *)isRead {
 	return @"isRead";
 }
@@ -101,6 +98,12 @@
 }
 + (NSString *)title {
 	return @"title";
+}
+@end
+
+@implementation BookRelationships 
++ (NSString *)author {
+	return @"author";
 }
 @end
 

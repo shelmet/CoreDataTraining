@@ -8,10 +8,13 @@
 
 #import "CDTViewController.h"
 #import "CDTBooksCollectionViewCell.h"
+#import "Book.h"
+#import "Author.h"
 
 @interface CDTViewController ()
 
 @property (nonatomic, strong) NSMutableArray *bookModelsArray;
+@property (nonatomic, strong) NSMutableDictionary *authorModelsDictionary;
 @property (nonatomic, strong) NSIndexPath *selectedBookIndexPath;
 
 @end
@@ -29,6 +32,7 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
     [self.booksCollectionView registerNib:cellNib forCellWithReuseIdentifier:kBookCellReuseIdentifier];
     
     [self fetchBooks];
+    [self fetchAuthors];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,13 +57,29 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
     NSError *error = nil;
     NSArray *results = [moc executeFetchRequest:fetchRequest error:&error];
     if (!results) {
-        NSLog(@"Error fetching Employee objects: %@\n%@", [error localizedDescription], [error userInfo]);
+        NSLog(@"Error fetching Books objects: %@\n%@", [error localizedDescription], [error userInfo]);
         abort();
     }
     self.bookModelsArray = [[NSMutableArray alloc] initWithArray:results];
     [self updateUI];
 }
 
+- (void) fetchAuthors {
+    NSManagedObjectContext *moc = self.container.viewContext;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:Author.entityName];
+    NSError *error = nil;
+    NSArray *results = [moc executeFetchRequest:fetchRequest error:&error];
+    if (!results) {
+        NSLog(@"Error fetching Authors objects: %@\n%@", [error localizedDescription], [error userInfo]);
+        abort();
+    }
+    self.authorModelsDictionary = [NSMutableDictionary dictionary];
+    for (Author *author in results) {
+        if (author.name) {
+            self.authorModelsDictionary[author.name] = author;
+        }
+    }
+}
 - (void) addNewBookWithTitle:(NSString *)title
                numberOfPages:(int)numberOfPages
                   authorName:(NSString *)authorName
@@ -69,13 +89,24 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
     Book *newBook = [Book insertInManagedObjectContext:moc];
     newBook.title = title;
     newBook.numberOfPagesValue = numberOfPages;
-    newBook.authorName = authorName;
     newBook.isReadValue = isRead;
     NSError *error = nil;
+
+    if ([[self.authorModelsDictionary allKeys] containsObject:authorName]) {
+        Author *storedAuthor = self.authorModelsDictionary[authorName];
+        newBook.author = storedAuthor;
+        [storedAuthor addBooksObject:newBook];
+    } else {
+        Author *newAuthor = [Author insertInManagedObjectContext:moc];
+        newAuthor.name = authorName;
+        newBook.author = newAuthor;
+        [newAuthor addBooksObject:newBook];
+        self.authorModelsDictionary[authorName] = newAuthor;
+    }
+    
     if ([moc save:&error] == NO) {
         NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
     }
-
     [self.bookModelsArray addObject:newBook];
     [self updateUI];
 }
@@ -91,7 +122,22 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
         return;
     }
     [self.bookModelsArray removeAllObjects];
+    [self clearAuthors];
     [self updateUI];
+}
+
+- (void) clearAuthors {
+    NSManagedObjectContext *moc = self.container.viewContext;
+    for (NSString *key in self.authorModelsDictionary) {
+        Author *author = self.authorModelsDictionary[key];
+        [moc deleteObject:author];
+    }
+    NSError *error = nil;
+    if ([moc save:&error] == NO) {
+        NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        return;
+    }
+    [self.authorModelsDictionary removeAllObjects];
 }
 
 - (void) deleteSelectedBook {
@@ -100,8 +146,15 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
         return;
     }
     Book *selectedBook = self.bookModelsArray[self.selectedBookIndexPath.row];
-    NSManagedObjectContext *moc = self.container.viewContext;
+    NSString *authorName = selectedBook.author.name;
+    NSManagedObjectContext *moc = selectedBook.managedObjectContext;
     [moc deleteObject:selectedBook];
+    Author *author = [self.authorModelsDictionary objectForKey:authorName];
+    [author removeBooksObject:selectedBook];
+    if ([author.books count] == 0) {
+        [moc deleteObject:author];
+    }
+    
     NSError *error = nil;
     if ([moc save:&error] == NO) {
         NSAssert(NO, @"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
@@ -112,6 +165,7 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
     self.selectedBookIndexPath = nil;
     [self.deleteButton setHidden:YES];
 }
+
 
 #pragma mark - @IBActions
 - (IBAction)addButtonTouchUp:(UIButton *)sender {
@@ -151,7 +205,7 @@ NSString *const kBookCellReuseIdentifier = @"booksCollectionViewCell";
         isSelected = YES;
     }
     [cell configureWithTitle:bookModel.title
-                  authorName:bookModel.authorName
+                  authorName:bookModel.author.name
                numberOfPages:(int)bookModel.numberOfPagesValue
                       isRead:bookModel.isReadValue
                   isSelected:isSelected];

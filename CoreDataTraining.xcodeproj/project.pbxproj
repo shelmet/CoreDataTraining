@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7909FCE32459BEAB009B7DE6 /* _Author.m in Sources */ = {isa = PBXBuildFile; fileRef = 7909FCE02459BEAB009B7DE6 /* _Author.m */; };
+		7909FCE42459BEAB009B7DE6 /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = 7909FCE12459BEAB009B7DE6 /* Author.m */; };
+		7909FCEB245A98D2009B7DE6 /* Book1ToBook2MigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7909FCEA245A98D2009B7DE6 /* Book1ToBook2MigrationPolicy.m */; };
+		7995211D245C473B00D0E2A4 /* V1V2Model.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7995211C245C473B00D0E2A4 /* V1V2Model.xcmappingmodel */; };
 		79C5C9BB2451C83B0051D0AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C9BA2451C83B0051D0AE /* AppDelegate.m */; };
 		79C5C9BE2451C83B0051D0AE /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C9BD2451C83B0051D0AE /* SceneDelegate.m */; };
 		79C5C9C12451C83B0051D0AE /* CDTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C5C9C02451C83B0051D0AE /* CDTViewController.m */; };
@@ -23,6 +27,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7909FCDF2459BEAB009B7DE6 /* Author.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Author.h; sourceTree = "<group>"; };
+		7909FCE02459BEAB009B7DE6 /* _Author.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Author.m; sourceTree = "<group>"; };
+		7909FCE12459BEAB009B7DE6 /* Author.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Author.m; sourceTree = "<group>"; };
+		7909FCE22459BEAB009B7DE6 /* _Author.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Author.h; sourceTree = "<group>"; };
+		7909FCE52459CFA1009B7DE6 /* CoreDataTraining 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CoreDataTraining 2.xcdatamodel"; sourceTree = "<group>"; };
+		7909FCE9245A95CB009B7DE6 /* Book1ToBook2MigrationPolicy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Book1ToBook2MigrationPolicy.h; sourceTree = "<group>"; };
+		7909FCEA245A98D2009B7DE6 /* Book1ToBook2MigrationPolicy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Book1ToBook2MigrationPolicy.m; sourceTree = "<group>"; };
+		7995211C245C473B00D0E2A4 /* V1V2Model.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = V1V2Model.xcmappingmodel; sourceTree = "<group>"; };
 		79C5C9B62451C83B0051D0AE /* CoreDataTraining.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataTraining.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C5C9B92451C83B0051D0AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79C5C9BA2451C83B0051D0AE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -57,6 +69,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7909FCE8245A95B7009B7DE6 /* MigrationPolicies */ = {
+			isa = PBXGroup;
+			children = (
+				7909FCE9245A95CB009B7DE6 /* Book1ToBook2MigrationPolicy.h */,
+				7909FCEA245A98D2009B7DE6 /* Book1ToBook2MigrationPolicy.m */,
+			);
+			path = MigrationPolicies;
+			sourceTree = "<group>";
+		};
 		79C5C9AD2451C83B0051D0AE = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +86,7 @@
 				79C5C9BF2451C83B0051D0AE /* CDTViewController.h */,
 				79C5C9C02451C83B0051D0AE /* CDTViewController.m */,
 				79C5C9C52451C83B0051D0AE /* CoreDataTraining.xcdatamodeld */,
+				7995211C245C473B00D0E2A4 /* V1V2Model.xcmappingmodel */,
 				79C5C9CE2451C83F0051D0AE /* main.m */,
 				79C5C9C82451C83F0051D0AE /* Assets.xcassets */,
 				79C5C9B72451C83B0051D0AE /* Products */,
@@ -82,6 +104,7 @@
 		79C5C9B82451C83B0051D0AE /* CoreDataTraining */ = {
 			isa = PBXGroup;
 			children = (
+				7909FCE8245A95B7009B7DE6 /* MigrationPolicies */,
 				79C5C9DF2456D9180051D0AE /* BooksCollectionViewCell */,
 				79CD807E24586F180057EED2 /* Model */,
 				79C5C9D62455D3C10051D0AE /* Storyboards */,
@@ -124,6 +147,10 @@
 		79CD807E24586F180057EED2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7909FCE22459BEAB009B7DE6 /* _Author.h */,
+				7909FCE02459BEAB009B7DE6 /* _Author.m */,
+				7909FCDF2459BEAB009B7DE6 /* Author.h */,
+				7909FCE12459BEAB009B7DE6 /* Author.m */,
 				79CD808224586F180057EED2 /* _Book.h */,
 				79CD808024586F180057EED2 /* _Book.m */,
 				79CD807F24586F180057EED2 /* Book.h */,
@@ -208,10 +235,14 @@
 				79CD808424586F190057EED2 /* Book.m in Sources */,
 				79C5C9C72451C83B0051D0AE /* CoreDataTraining.xcdatamodeld in Sources */,
 				79C5C9C12451C83B0051D0AE /* CDTViewController.m in Sources */,
+				7909FCE42459BEAB009B7DE6 /* Author.m in Sources */,
+				7909FCE32459BEAB009B7DE6 /* _Author.m in Sources */,
 				79CD808324586F190057EED2 /* _Book.m in Sources */,
 				79C5C9BB2451C83B0051D0AE /* AppDelegate.m in Sources */,
 				79C5C9BE2451C83B0051D0AE /* SceneDelegate.m in Sources */,
+				7909FCEB245A98D2009B7DE6 /* Book1ToBook2MigrationPolicy.m in Sources */,
 				79C5C9E32456D9180051D0AE /* CDTBooksCollectionViewCell.m in Sources */,
+				7995211D245C473B00D0E2A4 /* V1V2Model.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,9 +439,10 @@
 		79C5C9C52451C83B0051D0AE /* CoreDataTraining.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7909FCE52459CFA1009B7DE6 /* CoreDataTraining 2.xcdatamodel */,
 				79C5C9C62451C83B0051D0AE /* CoreDataTraining.xcdatamodel */,
 			);
-			currentVersion = 79C5C9C62451C83B0051D0AE /* CoreDataTraining.xcdatamodel */;
+			currentVersion = 7909FCE52459CFA1009B7DE6 /* CoreDataTraining 2.xcdatamodel */;
 			path = CoreDataTraining.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

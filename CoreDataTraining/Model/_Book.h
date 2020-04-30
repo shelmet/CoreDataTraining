@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class Author;
+
 @interface BookID : NSManagedObjectID {}
 @end
 
@@ -19,8 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)entityName;
 + (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) BookID *objectID;
-
-@property (nonatomic, strong, nullable) NSString* authorName;
 
 @property (nonatomic, strong, nullable) NSNumber* isRead;
 
@@ -36,12 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSString* title;
 
+@property (nonatomic, strong, nullable) Author *author;
+
 @end
 
 @interface _Book (CoreDataGeneratedPrimitiveAccessors)
-
-- (nullable NSString*)primitiveAuthorName;
-- (void)setPrimitiveAuthorName:(nullable NSString*)value;
 
 - (nullable NSNumber*)primitiveIsRead;
 - (void)setPrimitiveIsRead:(nullable NSNumber*)value;
@@ -58,13 +57,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString*)primitiveTitle;
 - (void)setPrimitiveTitle:(nullable NSString*)value;
 
+- (nullable Author*)primitiveAuthor;
+- (void)setPrimitiveAuthor:(nullable Author*)value;
+
 @end
 
 @interface BookAttributes: NSObject 
-+ (NSString *)authorName;
 + (NSString *)isRead;
 + (NSString *)numberOfPages;
 + (NSString *)title;
+@end
+
+@interface BookRelationships: NSObject
++ (NSString *)author;
 @end
 
 NS_ASSUME_NONNULL_END

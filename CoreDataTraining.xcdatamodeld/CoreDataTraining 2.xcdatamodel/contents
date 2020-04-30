@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Author" representedClassName="Author" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Book" inverseName="author" inverseEntity="Book"/>
+    </entity>
+    <entity name="Book" representedClassName="Book" syncable="YES">
+        <attribute name="isRead" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="numberOfPages" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="books" inverseEntity="Author"/>
+    </entity>
+    <elements>
+        <element name="Author" positionX="-23.8671875" positionY="-17.01953125" width="128" height="73"/>
+        <element name="Book" positionX="-282.35546875" positionY="-22.46484375" width="128" height="103"/>
+    </elements>
+</model>
